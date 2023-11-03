@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const API_KEY = '1d868d05865a228a5fb2fc24c37d7b36';
 const API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=fr-FR&region=FR`;
@@ -25,6 +32,10 @@ export const Home = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
+      <Image
+        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+        style={styles.image}
+      />
       <Text style={styles.title}>{item.title}</Text>
     </View>
   );
@@ -57,5 +68,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     flexShrink: 1,
+  },
+  image: {
+    width: 50,
+    height: 75,
+    marginRight: 10,
   },
 });
