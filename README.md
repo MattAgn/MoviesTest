@@ -1,10 +1,8 @@
-# Joconde
+# MoviesTest
 
-This app aims to be:
+This app aims to be a playground to do some pair programming on a simple app as part of the hiring process in the MYTF1 IPTV team.
 
-- An example of state of the art app setup we use at BAM
-- A repository where our app setup documentation is tested
-- A repository that we can [clone](./joconde_clone.md) to quickly start a new project
+It is a basic expo app displaying movies
 
 ## Setup
 
