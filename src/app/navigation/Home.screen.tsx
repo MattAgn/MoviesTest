@@ -18,17 +18,9 @@ export const Home = () => {
   const [nbMovies, setNbMovies] = useState<number>();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const json = await response.json();
-        setMovies(json.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMovies();
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((json) => setMovies(json.results));
   }, []);
 
   useEffect(() => {
