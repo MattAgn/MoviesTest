@@ -15,6 +15,7 @@ export type HomeRouteParams = undefined;
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [nbMovies, setNbMovies] = useState<number>();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -30,6 +31,11 @@ export const Home = () => {
     fetchMovies();
   }, []);
 
+  useEffect(() => {
+    const n = movies.length;
+    setNbMovies(n);
+  }, [movies]);
+
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Image
@@ -43,6 +49,9 @@ export const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ alignSelf: 'center', fontSize: 20 }}>Recent movies</Text>
+      <Text style={{ paddingBottom: 20, paddingTop: 20 }}>
+        Number of movies displayed: {nbMovies}
+      </Text>
 
       <FlatList
         data={movies}
