@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const API_KEY = '1d868d05865a228a5fb2fc24c37d7b36';
 const API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=fr-FR&region=FR`;
@@ -8,23 +15,25 @@ export type HomeRouteParams = undefined;
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [nbMovies, setNbMovies] = useState<number>();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const json = await response.json();
-        setMovies(json.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMovies();
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((json) => setMovies(json.results));
   }, []);
+
+  useEffect(() => {
+    const n = movies.length;
+    setNbMovies(n);
+  }, [movies]);
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
+      <Image
+        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+        style={styles.image}
+      />
       <Text style={styles.title}>{item.title}</Text>
     </View>
   );
@@ -32,6 +41,9 @@ export const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ alignSelf: 'center', fontSize: 20 }}>Recent movies</Text>
+      <Text style={{ paddingBottom: 20, paddingTop: 20, paddingLeft: 20 }}>
+        Number of movies displayed: {nbMovies}
+      </Text>
 
       <FlatList
         data={movies}
@@ -57,5 +69,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     flexShrink: 1,
+  },
+  image: {
+    width: 50,
+    height: 75,
+    marginRight: 10,
   },
 });
