@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
-import './toMatchComponentSnapshot';
 import { TEST_DEFAULT_DATE, TEST_DEFAULT_MATH_RANDOM } from './constants';
+import './toMatchComponentSnapshot';
 
 /**
  * Some globals have no reason to not ever be mocked if we want to have reproducible tests.

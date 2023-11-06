@@ -42,7 +42,7 @@ const config = {
   // module transformation
   transform: {
     // NOTE: If your projects uses special babel plugins, you'll need to go back to the slower default babel-jest setup
-    '\\.[jt]sx?$': ['@sucrase/jest-plugin', { jsxRuntime: 'automatic' }],
+    '^.+\\.(js)$': '<rootDir>/node_modules/babel-jest',
   },
   transformIgnorePatterns: [
     `node_modules/(?!(${packagesToTransform.join('|')})/)`,

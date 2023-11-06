@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
@@ -10,17 +11,9 @@ export const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const json = await response.json();
-        setMovies(json.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMovies();
+    axios({ method: 'get', url: API_URL }).then((json) =>
+      setMovies(json.data.results),
+    );
   }, []);
 
   const renderItem = ({ item }) => (
