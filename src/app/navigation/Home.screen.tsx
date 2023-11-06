@@ -41,7 +41,7 @@ export const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={{ alignSelf: 'center', fontSize: 20 }}>Recent movies</Text>
-      <Text style={{ paddingBottom: 20, paddingTop: 20 }}>
+      <Text style={{ paddingBottom: 20, paddingTop: 20, paddingLeft: 20 }}>
         Number of movies displayed: {nbMovies}
       </Text>
 
